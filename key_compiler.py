@@ -161,6 +161,7 @@ class GenerateScript:
             args = find_args(self.primary_data[key])
 
             self.script.add_line(f"def {process_name(key)}({convert_args(','.join([*args, "lang:str|None=None" if self.uses_typing else "lang"]), args, "none")}):")
+            self.script.add_line(f'"""{self.primary_data[key]}"""', 1)
             self.script.add_line("if not lang: lang=default_lang", 1)
             for language in self.data:
                 formatted_map = "{"

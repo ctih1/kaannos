@@ -5,7 +5,7 @@
 from typing import Literal, List
 Language=Literal['en', 'fi']
 languages: List[Language] = ['en', 'fi']
-default_lang:Language='en'
+default_lang: Language | str='en'
 def change_language(new_lang: Language | str) -> None: global default_lang; default_lang = new_lang
 def user_intro(user,lang:str|None=None):
 	if not lang: lang=default_lang
