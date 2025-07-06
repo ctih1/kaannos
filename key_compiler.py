@@ -133,12 +133,13 @@ def convert_args(inp: str, vars: List[str], mode: Literal["brackets", "none"] = 
 
 
 class GenerateScript:
-    def __init__(self, primary_lang:str, language_data: Dict[str, Dict[str,str]], use_typing: bool = True, output_path: str = "out.py"):
+    def __init__(self, primary_lang:str, language_data: Dict[str, Dict[str,str]], use_typing: bool = True, output_path: str = "out.py", generate_comments: bool = True):
         self.data = language_data
         self.primary = primary_lang
         self.script = Script()
         self.uses_typing: bool = use_typing
         self.output = output_path
+        self.generate_comments = generate_comments
 
     def create(self):
         # I really don't like this implementation but also it works 
@@ -161,10 +162,12 @@ class GenerateScript:
             args = find_args(self.primary_data[key])
 
             self.script.add_line(f"def {process_name(key)}({convert_args(','.join([*args, "lang:str|None=None" if self.uses_typing else "lang"]), args, "none")}):")
-            self.script.add_line('"""', 1)
-            for language in self.data:
-                self.script.add_line(f'{language}: {self.data[language].get(key, self.primary_data[key])}\n', 1)
-            self.script.add_line('"""', 1)
+            if self.generate_comments:
+                self.script.add_line('"""', 1)
+                self.script.add_line("### Locales", 1)
+                for language in self.data:
+                    self.script.add_line(f'- {language.capitalize()}: **{self.data[language].get(key, self.primary_data[key])}**', 1)
+                self.script.add_line('"""', 1)
             self.script.add_line("if not lang: lang=default_lang", 1)
             for language in self.data:
                 formatted_map = "{"
@@ -181,8 +184,8 @@ class GenerateScript:
             f.write(self.script.script)
 
 
-def build_result(primary_lang: str, locale_dir: str, types: bool, output_path):
+def build_result(primary_lang: str, locale_dir: str, types: bool, output_path: str, generate_comments: bool = True):
     start = time.time()
     lc = LanguageCollector(locale_dir)
-    GenerateScript(primary_lang, lc.languages, types, output_path).create()
+    GenerateScript(primary_lang, lc.languages, types, output_path, generate_comments).create()
     logger.info(f"Done in {time.time() - start}s")

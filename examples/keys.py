@@ -9,10 +9,9 @@ default_lang: Language | str='en'
 def change_language(new_lang: Language | str) -> None: global default_lang; default_lang = new_lang
 def user_intro(user,lang:str|None=None):
 	"""
-	en: Hello, {user}
-
-	fi: Hei, {user}
-
+	### Locales
+	- En: **Hello, {user}**
+	- Fi: **Hei, {user}**
 	"""
 	if not lang: lang=default_lang
 	if lang == "en": return "Hello, {user}".format_map({"user": user})
@@ -20,10 +19,9 @@ def user_intro(user,lang:str|None=None):
 	else: raise ValueError(f'Invalid language {lang}')
 def description(lang:str|None=None):
 	"""
-	en: You can manage your account settings here
-
-	fi: Voit hallitä käyttäjäsi asetuksia täältä
-
+	### Locales
+	- En: **You can manage your account settings here**
+	- Fi: **Voit hallitä käyttäjäsi asetuksia täältä**
 	"""
 	if not lang: lang=default_lang
 	if lang == "en": return "You can manage your account settings here"

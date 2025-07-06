@@ -9,7 +9,8 @@ key_compiler.build_result(
     primary_lang="en", # Using english as the primary language
     locale_dir=locales, # The path to our localization files
     output_path=output_path, # Python file where the keys will be stored
-    types=True # Enables types in the generated file
+    types=True, # Enables types in the generated file
+    generate_comments=True # Add intellisense function comments to show the keys in each language
 ) # > INFO: [key_compiler.py:build_result] Done in 0.005094289779663086s
 
 # We can now use our keys
