@@ -147,7 +147,7 @@ class GenerateScript:
             self.script.add_line("from typing import Literal, List")
             self.script.add_line(f"Language=Literal{list(self.data.keys())}")
             self.script.add_line(f"languages: List[Language] = {list(self.data.keys())}")
-            self.script.add_line(f"default_lang:Language='{self.primary}'")
+            self.script.add_line(f"default_lang: Language | str='{self.primary}'")
             self.script.add_line("def change_language(new_lang: Language | str) -> None: global default_lang; default_lang = new_lang")
         else:
             self.script.add_line(f"languages = {list(self.data.keys())}")
