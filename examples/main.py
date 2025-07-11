@@ -39,6 +39,6 @@ print(k.description())
 
 print()
 
-# Using a specifiy language
+# Using a specific language one time
 print(f"Description in english: {k.description(lang='en')}")
 print(f"Description in finnish: {k.description(lang='fi')}")
