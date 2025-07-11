@@ -40,5 +40,5 @@ print(k.description())
 print()
 
 # Using a specifiy language
-print(f"Description in english: {k.description(lang="en")}")
-print(f"Description in finnish: {k.description(lang="fi")}")
+print(f"Description in english: {k.description(lang='en')}")
+print(f"Description in finnish: {k.description(lang='fi')}")
