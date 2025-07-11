@@ -14,8 +14,8 @@ def user_intro(user,lang:str|None=None):
 	- Fi: **Hei, {user}**
 	"""
 	if not lang: lang=default_lang
-	if lang == "en": return "Hello, {user}".format_map({"user": user})
-	if lang == "fi": return "Hei, {user}".format_map({"user": user})
+	if lang == 'en': return "Hello, {user}".format_map({"user": user})
+	if lang == 'fi': return "Hei, {user}".format_map({"user": user})
 	else: raise ValueError(f'Invalid language {lang}')
 def description(lang:str|None=None):
 	"""
@@ -24,6 +24,6 @@ def description(lang:str|None=None):
 	- Fi: **Voit hallitä käyttäjäsi asetuksia täältä**
 	"""
 	if not lang: lang=default_lang
-	if lang == "en": return "You can manage your account settings here"
-	if lang == "fi": return "Voit hallitä käyttäjäsi asetuksia täältä"
+	if lang == 'en': return "You can manage your account settings here"
+	if lang == 'fi': return "Voit hallitä käyttäjäsi asetuksia täältä"
 	else: raise ValueError(f'Invalid language {lang}')

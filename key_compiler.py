@@ -174,10 +174,10 @@ class GenerateScript:
                 for arg in args:
                     formatted_map += f'"{convert_args(arg, args, "none")}": {convert_args(arg, args, "none")},'
                 formatted_map = formatted_map[:-1] + "}"
-                self.script.add_line(f'if lang == "{language}": return {convert_args(json.dumps(
+                self.script.add_line(f"""if lang == '{language}': return {convert_args(json.dumps(
                     self.data[language].get(key,self.primary_data[key]), 
                     ensure_ascii=False
-                ), args)}{f".format_map({formatted_map})" if len(args) > 0 else ""}', 1)
+                ), args)}{f'.format_map({formatted_map})' if len(args) > 0 else ''}""", 1)
 
             self.script.add_line("else: raise ValueError(f'Invalid language {lang}')", 1)
         with open(self.output, "w", encoding="UTF-8") as f:
